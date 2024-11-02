@@ -23,8 +23,6 @@ public class User {
     @Column(name = "age")
     private Integer age;
 
-    private final GoalController goalController = new GoalController();
-
     public Long getId() {
         return id;
     }
@@ -59,13 +57,5 @@ public class User {
 
     public void setAge(Integer age) {
         this.age = age;
-    }
-
-    public void addGoal(String goal) {
-        goalController.addGoal(goal);
-    }
-
-    public void deleteGoals() {
-        goalController.deleteGoals();
     }
 }

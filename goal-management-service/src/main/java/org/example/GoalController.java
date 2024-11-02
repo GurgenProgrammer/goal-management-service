@@ -1,24 +1,30 @@
 package org.example;
 
-import java.util.ArrayList;
+import org.springframework.web.bind.annotation.*;
+
 import java.util.List;
 
+@RestController
+@RequestMapping("/goals")
 public class GoalController {
-    List<Goal> goalList;
+    private final GoalService goalService;
+    private final GoalMapper goalMapper;
 
-    public GoalController() {
-        this.goalList = new ArrayList<>();
+    public GoalController(GoalService goalService, GoalMapper goalMapper) {
+        this.goalService = goalService;
+        this.goalMapper = goalMapper;
     }
 
-    public void addGoal(String goal) {
-        this.goalList.add(new Goal(goal));
+    @GetMapping
+    public List<GoalDetailsDto> getAllGoals() {
+        List<Goal> list = goalService.getAllGoals();
+        return goalMapper.mapList(list);
     }
 
-    public void deleteGoals() {
-        for (int i = 0; i < goalList.size(); i++) {
-            if (goalList.get(i).getRemainingTime() == 0) {
-                goalList.remove(i);
-            }
-        }
+    @PostMapping
+    public GoalDetailsDto createGoal(@RequestBody CreateGoalRequestDto requestDto) {
+        CreateGoalParams params = new CreateGoalParams(requestDto.getGoal(), requestDto.getRemainingTime());
+        Goal goal = goalService.saveGoal(params);
+        return goalMapper.mapGoal(goal);
     }
 }
