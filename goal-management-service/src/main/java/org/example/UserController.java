@@ -1,23 +1,30 @@
 package org.example;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.List;
 
 @RestController
+@RequestMapping("/users")
 public class UserController {
+    private final UserService userService;
+    private final UserMapper userMapper;
 
-    @Autowired
-    private UserRepository userRepository;
-
-    @GetMapping("/users")
-    public List<User> getAllUsers() {
-        return userRepository.findAll();
+    public UserController(UserService userService, UserMapper userMapper) {
+        this.userService = userService;
+        this.userMapper = userMapper;
     }
 
-    @PostMapping("/users")
-    public User createUser(@RequestBody User user) {
-        return userRepository.save(user);
+    @GetMapping
+    public List<User> getAllUsers() {
+        return userService.getAllUsers();
+    }
+
+    @PostMapping
+    public UserDetailsDto createUser(@RequestBody CreateUserRequestDto requestDto) {
+        CreateUserParams params = new CreateUserParams(requestDto.getId(),
+                requestDto.getFirstname(), requestDto.getLastname(),
+                requestDto.getUsername(), requestDto.getAge());
+        User user = userService.saveUser(params);
+        return userMapper.map(user);
     }
 }

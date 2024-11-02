@@ -1,27 +1,10 @@
 package org.example;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.Column;
-
-@Entity
-public class User {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+public class UserDetailsDto {
     private Long id;
-
-    @Column(name = "firstname", nullable = false)
     private String firstname;
-
-    @Column(name = "lastname", nullable = false)
     private String lastname;
-
-    @Column(name = "username", unique = true, nullable = false)
     private String username;
-
-    @Column(name = "age")
     private Integer age;
 
     public Long getId() {
@@ -56,11 +39,11 @@ public class User {
         this.username = username;
     }
 
-    public int getAge() {
+    public Integer getAge() {
         return age;
     }
 
-    public void setAge(int age) {
+    public void setAge(Integer age) {
         this.age = age;
     }
 }
