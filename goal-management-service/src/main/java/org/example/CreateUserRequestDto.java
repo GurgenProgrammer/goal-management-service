@@ -1,15 +1,19 @@
 package org.example;
 
-public class CreateUserRequestDto {
-    private Long id;
-    private String firstname;
-    private String lastname;
-    private String username;
-    private Integer age;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
-    public Long getId() {
-        return id;
-    }
+public class CreateUserRequestDto {
+    @JsonProperty("firstname")
+    private String firstname;
+
+    @JsonProperty("lastname")
+    private String lastname;
+
+    @JsonProperty("username")
+    private String username;
+
+    @JsonProperty("age")
+    private Integer age;
 
     public String getFirstname() {
         return firstname;
@@ -25,9 +29,5 @@ public class CreateUserRequestDto {
 
     public Integer getAge() {
         return age;
-    }
-
-    public void setAge(Integer age) {
-        this.age = age;
     }
 }

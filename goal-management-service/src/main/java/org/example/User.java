@@ -1,11 +1,10 @@
 package org.example;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.Column;
+import jakarta.persistence.*;
 
+import java.util.List;
+
+@Table(name = "users")
 @Entity
 public class User {
     @Id
@@ -24,12 +23,10 @@ public class User {
     @Column(name = "age")
     private Integer age;
 
+    private final GoalController goalController = new GoalController();
+
     public Long getId() {
         return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
     }
 
     public String getFirstname() {
@@ -60,7 +57,15 @@ public class User {
         return age;
     }
 
-    public void setAge(int age) {
+    public void setAge(Integer age) {
         this.age = age;
+    }
+
+    public void addGoal(String goal) {
+        goalController.addGoal(goal);
+    }
+
+    public void deleteGoals() {
+        goalController.deleteGoals();
     }
 }
