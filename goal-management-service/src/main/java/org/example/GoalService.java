@@ -9,12 +9,9 @@ import java.util.Optional;
 @Service
 public class GoalService {
     private final GoalRepository goalRepository;
-    private final UserService userService;
 
-    @Autowired
-    public GoalService(GoalRepository goalRepository, UserService userService) {
+    public GoalService(GoalRepository goalRepository) {
         this.goalRepository = goalRepository;
-        this.userService = userService;
     }
 
     public List<Goal> getGoalsByUserId(Long userId) {
