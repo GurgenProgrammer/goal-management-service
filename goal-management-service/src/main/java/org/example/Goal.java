@@ -15,7 +15,7 @@ public class Goal {
     @Column(name = "remaining_time", nullable = false)
     private Integer remainingTime;
 
-    @Column(name = "user_id", nullable = false)
+    @Column(name = "user", nullable = false)
     private Long userId;
 
     public String getGoal() {
