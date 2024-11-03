@@ -5,7 +5,6 @@ import jakarta.persistence.*;
 @Table(name = "goals")
 @Entity
 public class Goal {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -16,19 +15,30 @@ public class Goal {
     @Column(name = "remaining_time", nullable = false)
     private Integer remainingTime;
 
+    @Column(name = "user_id", nullable = false)
+    private Long userId;
+
+    public String getGoal() {
+        return goal;
+    }
+
     public void setGoal(String goal) {
         this.goal = goal;
+    }
+
+    public Integer getRemainingTime() {
+        return remainingTime;
     }
 
     public void setRemainingTime(Integer remainingTime) {
         this.remainingTime = remainingTime;
     }
 
-    public String getGoal() {
-        return this.goal;
+    public Long getUserId() {
+        return userId;
     }
 
-    public Integer getRemainingTime() {
-        return this.remainingTime;
+    public void setUserId(Long userId) {
+        this.userId = userId;
     }
 }

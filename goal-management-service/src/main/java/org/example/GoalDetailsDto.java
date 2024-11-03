@@ -1,10 +1,13 @@
 package org.example;
 
-import jakarta.persistence.criteria.CriteriaBuilder;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class GoalDetailsDto {
     private String goal;
     private Integer remainingTime;
+
+    @JsonProperty("user")
+    private UserDetailsDto userDetailsDto;
 
     public String getGoal() {
         return goal;
@@ -22,4 +25,11 @@ public class GoalDetailsDto {
         this.remainingTime = remainingTime;
     }
 
+    public UserDetailsDto getUserDetailsDto() {
+        return userDetailsDto;
+    }
+
+    public void setUserDetailsDto(UserDetailsDto userDetailsDto) {
+        this.userDetailsDto = userDetailsDto;
+    }
 }

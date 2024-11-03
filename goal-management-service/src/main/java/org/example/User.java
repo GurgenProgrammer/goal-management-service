@@ -2,8 +2,6 @@ package org.example;
 
 import jakarta.persistence.*;
 
-import java.util.List;
-
 @Table(name = "users")
 @Entity
 public class User {
@@ -25,6 +23,10 @@ public class User {
 
     public Long getId() {
         return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getFirstname() {
@@ -51,7 +53,7 @@ public class User {
         this.username = username;
     }
 
-    public int getAge() {
+    public Integer getAge() {
         return age;
     }
 
