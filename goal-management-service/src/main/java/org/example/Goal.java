@@ -2,6 +2,9 @@ package org.example;
 
 import jakarta.persistence.*;
 
+import java.time.LocalDateTime;
+import java.util.Date;
+
 @Table(name = "goals")
 @Entity
 public class Goal {
@@ -15,8 +18,12 @@ public class Goal {
     @Column(name = "remaining_time", nullable = false)
     private Integer remainingTime;
 
-    @Column(name = "user", nullable = false)
-    private Long userId;
+    @ManyToOne
+    @JoinColumn(name = "user_id", nullable = false)
+    private User user;
+
+    @Column(name = "created_at", nullable = false)
+    private LocalDateTime createdAt;
 
     public String getGoal() {
         return goal;
@@ -34,11 +41,19 @@ public class Goal {
         this.remainingTime = remainingTime;
     }
 
-    public Long getUserId() {
-        return userId;
+    public User getUser() {
+        return user;
     }
 
-    public void setUserId(Long userId) {
-        this.userId = userId;
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    public LocalDateTime getCreatedTime() {
+        return createdAt;
+    }
+
+    public void setCreatedTime(LocalDateTime localDateTime) {
+        this.createdAt = localDateTime;
     }
 }

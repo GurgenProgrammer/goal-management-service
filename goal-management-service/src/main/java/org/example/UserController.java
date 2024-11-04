@@ -10,23 +10,23 @@ import java.util.Optional;
 @RestController
 @RequestMapping("/users")
 public class UserController {
-    private final UserService userService;
+    private final UserServiceImpl userServiceImpl;
     private final UserMapper userMapper;
 
-    public UserController(UserService userService, UserMapper userMapper) {
-        this.userService = userService;
+    public UserController(UserServiceImpl userServiceImpl, UserMapper userMapper) {
+        this.userServiceImpl = userServiceImpl;
         this.userMapper = userMapper;
     }
 
     @GetMapping
     public List<UserDetailsDto> getAllUsers() {
-        List<User> list = userService.getAllUsers();
+        List<User> list = userServiceImpl.getAll();
         return userMapper.mapList(list);
     }
 
     @GetMapping("/{id}")
     public UserDetailsDto getUserById(@PathVariable Long id) {
-        Optional<User> userOptional = userService.getUserById(id);
+        Optional<User> userOptional = userServiceImpl.getById(id);
         if (userOptional.isPresent()) {
             User user = userOptional.get();
             return userMapper.mapUser(user);
@@ -39,7 +39,7 @@ public class UserController {
         CreateUserParams params = new CreateUserParams(
                 requestDto.getFirstname(), requestDto.getLastname(),
                 requestDto.getUsername(), requestDto.getAge());
-        User user = userService.saveUser(params);
+        User user = userServiceImpl.save(params);
         return userMapper.mapUser(user);
     }
 }

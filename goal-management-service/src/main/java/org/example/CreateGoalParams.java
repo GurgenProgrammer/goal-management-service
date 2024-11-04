@@ -1,14 +1,18 @@
 package org.example;
 
+import java.time.LocalDateTime;
+
 public class CreateGoalParams {
     private final String goal;
     private final Integer remainingTime;
-    private final Long userId;
+    private final User user;
+    private final LocalDateTime createdAt;
 
-    public CreateGoalParams(String goal, Integer remainingTime, Long userId) {
+    public CreateGoalParams(String goal, Integer remainingTime, User user, LocalDateTime createdAt) {
         this.goal = goal;
         this.remainingTime = remainingTime;
-        this.userId = userId;
+        this.user = user;
+        this.createdAt = createdAt;
     }
 
     public String getGoal() {
@@ -19,7 +23,11 @@ public class CreateGoalParams {
         return remainingTime;
     }
 
-    public Long getUserId() {
-        return userId;
+    public User getUser() {
+        return user;
+    }
+
+    public LocalDateTime getCreatedTime() {
+        return createdAt;
     }
 }

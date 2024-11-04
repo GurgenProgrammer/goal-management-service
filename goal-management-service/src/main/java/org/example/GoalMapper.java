@@ -10,30 +10,25 @@ import java.util.Optional;
 @Component
 public class GoalMapper {
 
-    private final UserService userService;
-    private final UserMapper userMapper;
+    private final UserMapper map;
 
-    public GoalMapper(UserService userService, UserMapper userMapper) {
-        this.userService = userService;
-        this.userMapper = userMapper;
+    public GoalMapper(UserMapper userMapper) {
+        this.map = userMapper;
     }
 
-    public GoalDetailsDto mapGoal(Goal goal) {
+    public GoalDetailsDto map(Goal goal) {
         GoalDetailsDto dto = new GoalDetailsDto();
         dto.setGoal(goal.getGoal());
         dto.setRemainingTime(goal.getRemainingTime());
-        Optional<User> userOptional = userService.getUserById(goal.getUserId());
-        if (userOptional.isPresent()) {
-            User user = userOptional.get();
-            dto.setUserDetailsDto(userMapper.mapUser(user));
-        }
+        dto.setUserDetailsDto(map.mapUser(goal.getUser()));
+        dto.setCreatedTime(goal.getCreatedTime());
         return dto;
     }
 
     public List<GoalDetailsDto> mapList(List<Goal> goals) {
         List<GoalDetailsDto> dtoList = new ArrayList<>();
         for (Goal goal : goals) {
-            dtoList.add(mapGoal(goal));
+            dtoList.add(map(goal));
         }
         return dtoList;
     }
