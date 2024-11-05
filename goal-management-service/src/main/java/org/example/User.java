@@ -21,6 +21,9 @@ public class User {
     @Column(name = "age")
     private Integer age;
 
+    @Column(name = "user_type")
+    private UserTypes userType;
+
     public Long getId() {
         return id;
     }
@@ -59,5 +62,13 @@ public class User {
 
     public void setAge(Integer age) {
         this.age = age;
+    }
+
+    public UserTypes getUserType() {
+        return userType;
+    }
+
+    public void setUserType(UserTypes userType) {
+        this.userType = userType;
     }
 }

@@ -18,6 +18,12 @@ public class GoalController {
         this.goalMapper = goalMapper;
     }
 
+    @PutMapping("/change_status/{goalId}/{status}")
+    public GoalDetailsDto changeGoalStatus(@PathVariable("goalId") Long goalId, @PathVariable("status") GoalStatus status) {
+        return goalMapper.map(goalServiceImpl.updateStatus(goalId, status));
+    }
+
+
     @GetMapping("/users/{userId}")
     public List<GoalDetailsDto> getGoalsByUserId(@PathVariable("userId") Long userId) {
         List<Goal> goalList = goalServiceImpl.getGoalsByUserId(userId);

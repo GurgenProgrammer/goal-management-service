@@ -20,8 +20,8 @@ public class UserMapper {
 
     public List<UserDetailsDto> mapList(List<User> users) {
         List<UserDetailsDto> dtoList = new ArrayList<>();
-        for (int i = 0; i < users.size(); i++) {
-            dtoList.add(mapUser(users.get(i)));
+        for (User user : users) {
+            dtoList.add(mapUser(user));
         }
         return dtoList;
     }
